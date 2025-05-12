@@ -12,7 +12,7 @@ import {
 import { FiMenu, FiUser, FiHome } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { LogoutButton } from '@/features/auth/LogoutButton';
+import { LogoutButton } from '@/components/ui/LogoutButton';
 
 const sneakerImage =
   'https://images.unsplash.com/photo-1618677831708-0e7fda3148b4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNuZWFrZXJ8ZW58MHx8MHx8fDA%3D';
@@ -87,7 +87,7 @@ const TopBar = ({ onOpenSidebar }: { onOpenSidebar: () => void }) => {
 };
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const [sidebarVisible, setSidebarVisible] = useState(false); // Start with sidebar hidden
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -106,7 +106,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           transition='transform 0.3s ease-in-out'
           transform={sidebarVisible ? 'translateX(0)' : 'translateX(-100%)'}
           display={{ base: 'none', md: 'block' }}
-          zIndex={1} // Ensures the sidebar is below content
+          zIndex={1}
         >
           <Sidebar onNavigate={navigate} />
         </Box>
@@ -127,7 +127,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <Sidebar
             onNavigate={(path) => {
               navigate(path);
-              setSidebarVisible(false); // Close the sidebar after navigation on mobile
+              setSidebarVisible(false);
             }}
           />
         </Box>
@@ -141,7 +141,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           transition='transform 0.3s ease-in-out'
           transform={sidebarVisible ? 'translateX(200px)' : 'translateX(0)'}
           position='relative'
-          zIndex={0} // Content stays above sidebar
+          zIndex={0}
         >
           {children}
         </Box>

@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
     proxy: {
-      '/api': 'http://localhost:3001', // forward /api requests to Express
+      '/api': 'http://localhost:3001', // forward /api requests to Express in development
     },
   },
 });

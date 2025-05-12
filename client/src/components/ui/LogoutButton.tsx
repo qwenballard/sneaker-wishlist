@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import { useLogout } from './hooks';
+import { useLogout } from '../../features/auth/hooks';
 import { useNavigate } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 
