@@ -4,7 +4,6 @@ import cors from 'cors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 
-import healthRouter from './routes/health';
 import authRouter from './routes/auth';
 
 const app = express();
@@ -21,7 +20,6 @@ const corsOrigin = process.env.STAGE_FRONTEND_URL;
 app.use(cors({ origin: corsOrigin }));
 
 // API Routes
-app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 
 // Serve static files in production
