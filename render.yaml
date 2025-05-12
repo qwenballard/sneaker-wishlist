@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: sneaker-wishlist
+    env: node
+    buildCommand: |
+      yarn install
+      yarn workspace client build
+      yarn workspace server build
+    startCommand: node server/dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production

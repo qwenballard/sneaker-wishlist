@@ -1,0 +1,34 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables
+.env
+.env.*.local
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor-specific
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+
+# Optional: ignore Prisma local files (if you're using Prisma)
+prisma/dev.db
+prisma/migrations/
+
+# Optional: ignore uploads or temp directories
+uploads/
+tmp/

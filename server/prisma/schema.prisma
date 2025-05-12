@@ -1,0 +1,19 @@
+// step 1: npx prisma migrate dev --name <migration_name> --create-only
+// step 2: npm run staging:db
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserProfile {
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique  // Tied to Supabase `auth.users` user_id
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
