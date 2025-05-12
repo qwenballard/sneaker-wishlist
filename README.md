@@ -16,6 +16,7 @@ Below is a list of ongoing tasks which I would want to implement to get this to 
 - [ ] Allow user to create, edit, delete list which will hold whatever sneakers they want
 - [ ] Improve error handling throughout app
 - [ ] Update infrastructure to allow for various environments (staging/prod)
+- [ ] Deploy app using Render (Hobby/Free Tier)
 
 # React/Vite/TanstackQuery
 
