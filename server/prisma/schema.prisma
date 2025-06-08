@@ -1,5 +1,5 @@
 // step 1: npx prisma migrate dev --name <migration_name> --create-only
-// step 2: npm run staging:db
+// step 2: npm run stagingDeploy:db
 
 generator client {
   provider = "prisma-client-js"
@@ -12,8 +12,74 @@ datasource db {
 
 model UserProfile {
   id        Int      @id @default(autoincrement())
-  userId    String   @unique  // Tied to Supabase `auth.users` user_id
+  userId    String   @unique // Supabase `auth.users.id` (UUID)
   imageUrl  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  lists SneakerList[] @relation("UserSneakerLists")
+}
+
+model Sneaker {
+  id         Int      @id @default(autoincrement())
+  name       String
+  silhouette String?
+  brand      String?
+  category   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  sourceSKUs SneakerSourceSKU[]
+  listItems  SneakerListItem[]
+}
+
+model SneakerSourceSKU {
+  id        Int      @id @default(autoincrement())
+  sneakerId Int
+  source    String // "stockx", "goat", etc.
+  sourceSku String
+  createdAt DateTime @default(now())
+
+  sneaker    Sneaker            @relation(fields: [sneakerId], references: [id])
+  sourceData SneakerSourceData?
+
+  @@unique([source, sourceSku])
+}
+
+model SneakerSourceData {
+  id                 Int       @id @default(autoincrement())
+  sneakerSourceSkuId Int       @unique
+  brand              String?
+  colorway           String?
+  retailPrice        Float?
+  releaseDate        DateTime?
+  imageUrl           String?
+  url                String?
+  lastSyncedAt       DateTime  @default(now())
+  createdAt          DateTime  @default(now())
+
+  sneakerSourceSKU SneakerSourceSKU @relation(fields: [sneakerSourceSkuId], references: [id])
+}
+
+model SneakerList {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user  UserProfile       @relation("UserSneakerLists", fields: [userId], references: [userId])
+  items SneakerListItem[]
+}
+
+model SneakerListItem {
+  id        Int      @id @default(autoincrement())
+  sneakerId Int
+  listId    Int
+  notes     String?
+  createdAt DateTime @default(now())
+
+  sneaker Sneaker     @relation(fields: [sneakerId], references: [id])
+  list    SneakerList @relation(fields: [listId], references: [id])
 }

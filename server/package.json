@@ -6,7 +6,7 @@
     "dev": "cross-env NODE_ENV=staging ts-node-dev --respawn src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "staging:db": "cross-env npx prisma migrate deploy"
+    "stagingDeploy:db": "cross-env npx prisma migrate deploy"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.8",
